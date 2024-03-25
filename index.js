@@ -7,7 +7,7 @@ const TOKEN = process.env.TELE_BOT_TOKEN;
 const server = express();
 const bot = new TelegramBot(TOKEN, { polling: true });
 const port = process.env.PORT || 3000;
-const gameName = "@brian_test_game01_bot"; // SHORT NAME GAME THAT SET ON TELE 
+const gameName = "brian_test_game01_bot"; // SHORT NAME GAME THAT SET ON TELE 
 const domainGameHeroku = "https://trex-brian-tele-01-8d0441e438f8.herokuapp.com/";
 console.log("TOKEN : ")
 console.log(TOKEN)
@@ -16,7 +16,11 @@ const queries = {};
 server.use(express.static(path.join(__dirname, 'public')));
 
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This bot implements a T-Rex jumping game. Say /game if you want to play."));
-bot.onText(/start|game/, (msg) => bot.sendGame(msg.from.id, gameName));
+bot.onText(/start|game/, (msg) => { 
+    bot.sendMessage(`User : ${msg.from.username} called /startgame : Game name : ${gameName}`)
+    console.log(`User : ${msg.from.username} called /startgame : Game name : ${gameName}`)
+    bot.sendGame(msg.from.id, gameName) 
+});
 
 bot.on("callback_query", function (query) {
     if (query.game_short_name !== gameName) {
