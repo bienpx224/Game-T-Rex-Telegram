@@ -7,7 +7,7 @@ const TOKEN = process.env.TELE_BOT_TOKEN;
 const server = express();
 const bot = new TelegramBot(TOKEN, { polling: true });
 const port = process.env.PORT || 3000;
-const gameName = "BrianTestGame01"; // SHORT NAME GAME THAT SET ON TELE 
+const gameName = "Trex01"; // SHORT NAME GAME THAT SET ON TELE 
 const domainGameHeroku = "https://trex-brian-tele-01-8d0441e438f8.herokuapp.com/";
 console.log("TOKEN : ")
 console.log(TOKEN)
