@@ -1,14 +1,16 @@
 const express = require("express");
 const path = require("path");
 const TelegramBot = require("node-telegram-bot-api");
+require('dotenv').config();
 
-const TOKEN = "7041539774:AAGKhvf9Kx-XYEkaVW284iGih9zEWNedd3E";
+const TOKEN = process.env.TELE_BOT_TOKEN;
 const server = express();
 const bot = new TelegramBot(TOKEN, { polling: true });
 const port = process.env.PORT || 3000;
 const gameName = "T-Rex Game on Tele";
 const domainGameHeroku = "https://trex-brian-tele-01-8d0441e438f8.herokuapp.com/";
-
+console.log("TOKEN : ")
+console.log(TOKEN)
 const queries = {};
 
 server.use(express.static(path.join(__dirname, 'public')));
