@@ -17,7 +17,7 @@ server.use(express.static(path.join(__dirname, 'public')));
 
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This bot implements a T-Rex jumping game. Say /game if you want to play."));
 bot.onText(/start|game/, (msg) => { 
-    bot.sendMessage(`User : ${msg.from.username} called /startgame : Game name : ${gameName}`)
+    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called /startgame : Game name : ${gameName}`)
     console.log(`User : ${msg.from.username} called /startgame : Game name : ${gameName}`)
     bot.sendGame(msg.from.id, gameName) 
 });
