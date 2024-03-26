@@ -42,7 +42,7 @@ bot.on("callback_query", function (query) {
         bot.answerCallbackQuery(query.id, "Sorry, '" + query.game_short_name + "' is not available.");
     } else {
         queries[query.id] = query;
-        let gameurl = domainGameHeroku + gameName + "/index.html?id=" + query.id;
+        let gameurl = domainGameHeroku + query.game_short_name + "/index.html?id=" + query.id;
         bot.answerCallbackQuery({
             callback_query_id: query.id,
             url: gameurl
