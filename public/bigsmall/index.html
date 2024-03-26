@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Example</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="output"></div>
+
+        <div id="controls">
+            <div class="field">
+                <h1 id="resultText"></h1>
+            </div>
+            <div class="field">
+                <label for="smallMoney">Small Money:</label>
+                <input type="text" id="smallMoney" readonly>
+            </div>
+            <div class="field">
+                <label for="smallPlayers">Small Players:</label>
+                <input type="text" id="smallPlayers" readonly>
+            </div>
+            <div class="field">
+                <label for="bigMoney">Big Money:</label>
+                <input type="text" id="bigMoney" readonly>
+            </div>
+            <div class="field">
+                <label for="bigPlayers">Big Players:</label>
+                <input type="text" id="bigPlayers" readonly>
+            </div>
+            <div class="field">
+                <label for="counter">Counter:</label>
+                <input type="text" id="counter" readonly>
+            </div>
+            <div class="field">
+                <label for="result">Result:</label>
+                <input type="text" id="result" readonly>
+            </div>
+            <div class="field">
+                <label for="roundNumber">Round Number:</label>
+                <input type="text" id="roundNumber" readonly>
+            </div>
+
+            <div id="controls">
+                <button class="btn-red" onclick="placeBet('Xiu')">Đặt cho Xỉu</button>
+                <button class="btn-blue" onclick="placeBet('Tai')">Đặt cho Tài</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const socket = new WebSocket('ws://localhost:3000');
+
+        socket.addEventListener('open', function (event) {
+            console.log('Connected to WebSocket');
+        });
+
+        socket.addEventListener('message', function (event) {
+            console.log('Message from server:', event.data);
+            const message = JSON.parse(event.data);
+            displayMessage(message);
+            logMessage(event.data);
+        });
+
+        socket.addEventListener('error', function (event) {
+            console.error('WebSocket error:', event);
+        });
+
+        socket.addEventListener('close', function (event) {
+            console.log('WebSocket connection closed');
+        });
+
+        function displayMessage(message) {
+            document.getElementById('smallMoney').value = message.data.small_money;
+            document.getElementById('smallPlayers').value = message.data.small_players;
+            document.getElementById('bigMoney').value = message.data.big_money;
+            document.getElementById('bigPlayers').value = message.data.big_players;
+            document.getElementById('counter').value = message.data.counter;
+            document.getElementById('result').value = message.data.result;
+            document.getElementById('roundNumber').value = message.data.roundNumber;
+            if (message.data.result == -1) {
+                document.getElementById("resultText").textContent = "Trận đấu đang đếm ngược...";
+            } else if (message.data.result == 0) {
+                document.getElementById("resultText").textContent = "XỈU đã CHIẾN THẮNG !";
+            } else {
+                document.getElementById("resultText").textContent = "TÀI đã CHIẾN THẮNG !";
+            }
+        }
+
+        function placeBet(choice) {
+            const message = {
+                action: 'place_bet',
+                choice: choice
+            };
+            socket.send(JSON.stringify(message));
+        }
+
+        function logMessage(message) {
+            document.getElementById('output').innerHTML += '<p>' + message + '</p>';
+            // Cuộn xuống dưới cùng của khung
+            document.getElementById('output').scrollTop = document.getElementById('output').scrollHeight;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+#container {
+    display: flex;
+    width: 80%;
+    height: 80%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#output {
+    flex: 1;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+    height: 100%;
+    overflow-y: scroll;
+}
+#controls {
+    flex: 1;
+    padding: 10px;
+    height: 100%;
+    overflow-y: scroll;
+}
+.field {
+    margin-bottom: 10px;
+}
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+/* CSS cho button */
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-blue{
+    background-color: #007bff;
+    transition: background-color 0.3s ease;
+}
+.btn-red{
+    background-color: #d93636;
+    transition: background-color 0.3s ease;
+}
+button:hover {
+    background-color: #0056b3;
+}
