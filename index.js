@@ -22,23 +22,23 @@ bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This bot implements so
 bot.onText(/trex/, (msg) => { 
     bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameName}`)
     console.log(`User : ${msg.from.username} called /trex : Game name : ${gameName}`)
-    bot.sendGame(msg.from.id, gameName) 
+    bot.sendGame(msg.from.id, gameNameTrex) 
 });
 
 bot.onText(/match3/, (msg) => { 
     bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameName}`)
     console.log(`User : ${msg.from.username} called /match3 : Game name : ${gameName}`)
-    bot.sendGame(msg.from.id, gameName) 
+    bot.sendGame(msg.from.id, gameNameMatch3) 
 });
 
 bot.onText(/shooter/, (msg) => { 
     bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameName}`)
     console.log(`User : ${msg.from.username} called /shooter : Game name : ${gameName}`)
-    bot.sendGame(msg.from.id, gameName) 
+    bot.sendGame(msg.from.id, gameNameShooter) 
 });
 
 bot.on("callback_query", function (query) {
-    if (query.game_short_name !== gameName) {
+    if (query.game_short_name !== gameNameTrex && query.game_short_name !== gameNameMatch3 && query.game_short_name !== gameNameShooter ) {
         bot.answerCallbackQuery(query.id, "Sorry, '" + query.game_short_name + "' is not available.");
     } else {
         queries[query.id] = query;
