@@ -13,6 +13,7 @@ const gameNameTrex = "trextest01"; // SHORT NAME GAME THAT SET ON TELE
 const gameNameMatch3 = "match3"; // SHORT NAME GAME THAT SET ON TELE 
 const gameNameShooter = "shooter"; // SHORT NAME GAME THAT SET ON TELE 
 const gameNameBattleShip = "battleship"; // SHORT NAME GAME THAT SET ON TELE 
+const gameNameBigSmall = "bigsmall"; // SHORT NAME GAME THAT SET ON TELE 
 const domainGameHeroku = "https://trex-brian-tele-01-8d0441e438f8.herokuapp.com/";
 
 const queries = {};
@@ -51,8 +52,14 @@ bot.onText(/ship/, (msg) => {
     bot.sendGame(msg.from.id, gameNameBattleShip) 
 });
 
+bot.onText(/bigsmall/, (msg) => { 
+    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameNameBigSmall}`)
+    console.log(`User : ${msg.from.username} called /bigsmall : Game name : ${gameNameBigSmall}`)
+    bot.sendGame(msg.from.id, gameNameBigSmall) 
+});
+
 bot.on("callback_query", function (query) {
-    if (query.game_short_name !== gameNameTrex && query.game_short_name !== gameNameMatch3 && query.game_short_name !== gameNameShooter ) {
+    if (query.game_short_name !== gameNameTrex && query.game_short_name !== gameNameMatch3 && query.game_short_name !== gameNameShooter &&  query.game_short_name !== gameNameBigSmall && query.game_short_name !== gameNameBattleShip) {
         bot.answerCallbackQuery(query.id, "Sorry, '" + query.game_short_name + "' is not available.");
     } else {
         queries[query.id] = query;
