@@ -96,14 +96,10 @@ server.get("/highscore/:score", function (req, res, next) {
 
 
 /* SERVER WEB SOCKET  */
-var WebSocket  = require('ws');
+var { Server }  = require('ws');
 const timeCountdown = 1000
 const timeDelayEachMatch = 4000
-let WSServer = WebSocket.Server
-let wss = new WSServer({
-    server : server,
-    perMessageDeflate : false
-})
+let wss = new Server({server})
 
 // const wss = new WebSocket.Server({ port:9999 }, ()=>{
 //     console.log("Server started")
