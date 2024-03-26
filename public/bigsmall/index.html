@@ -55,8 +55,15 @@
     </div>
 
     <script>
+        /* C1 : Localhost  */
         // const socket = new WebSocket('ws://localhost:3000');
-        const socket = new WebSocket('wss://trex-brian-tele-01-8d0441e438f8.herokuapp.com');
+        
+        /* C2 : Heroku  */
+        // const socket = new WebSocket('wss://trex-brian-tele-01-8d0441e438f8.herokuapp.com');
+
+        /*  C3 : https://devcenter.heroku.com/articles/node-websockets */
+        const HOST = location.origin.replace(/^http/, 'ws')
+        const socket = new WebSocket(HOST);
 
         socket.addEventListener('open', function (event) {
             console.log('Connected to WebSocket');
