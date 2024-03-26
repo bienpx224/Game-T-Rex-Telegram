@@ -19,21 +19,28 @@ const queries = {};
 server.use(express.static(path.join(__dirname, 'public')));
 
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This bot implements some funny games. Say /trex, /match3, /shooter if you want to play games."));
+
+bot.onText(/game|play/, (msg) => { 
+    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameNameMatch3}`)
+    console.log(`User : ${msg.from.username} called /game|play : Game name : ${gameNameMatch3}`)
+    bot.sendGame(msg.from.id, gameNameMatch3) 
+});
+
 bot.onText(/trex/, (msg) => { 
-    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameName}`)
-    console.log(`User : ${msg.from.username} called /trex : Game name : ${gameName}`)
+    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameNameTrex}`)
+    console.log(`User : ${msg.from.username} called /trex : Game name : ${gameNameTrex}`)
     bot.sendGame(msg.from.id, gameNameTrex) 
 });
 
 bot.onText(/match3/, (msg) => { 
-    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameName}`)
-    console.log(`User : ${msg.from.username} called /match3 : Game name : ${gameName}`)
+    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameNameMatch3}`)
+    console.log(`User : ${msg.from.username} called /match3 : Game name : ${gameNameMatch3}`)
     bot.sendGame(msg.from.id, gameNameMatch3) 
 });
 
 bot.onText(/shooter/, (msg) => { 
-    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameName}`)
-    console.log(`User : ${msg.from.username} called /shooter : Game name : ${gameName}`)
+    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameNameShooter}`)
+    console.log(`User : ${msg.from.username} called /shooter : Game name : ${gameNameShooter}`)
     bot.sendGame(msg.from.id, gameNameShooter) 
 });
 
