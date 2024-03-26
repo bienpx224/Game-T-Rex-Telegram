@@ -13,7 +13,7 @@ console.log("TOKEN : ")
 console.log(TOKEN)
 const queries = {};
 
-server.use(express.static(path.join(__dirname, 'public')));
+server.use(express.static(path.join(__dirname, 'public-match3')));
 
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This bot implements a T-Rex jumping game. Say /game if you want to play."));
 bot.onText(/start|game/, (msg) => { 
