@@ -8,17 +8,32 @@ const server = express();
 const bot = new TelegramBot(TOKEN, { polling: true });
 const port = process.env.PORT || 3000;
 const gameName = "trextest01"; // SHORT NAME GAME THAT SET ON TELE 
+const gameNameTrex = "trextest01"; // SHORT NAME GAME THAT SET ON TELE 
+const gameNameMatch3 = "match3"; // SHORT NAME GAME THAT SET ON TELE 
+const gameNameShooter = "shooter"; // SHORT NAME GAME THAT SET ON TELE 
 const domainGameHeroku = "https://trex-brian-tele-01-8d0441e438f8.herokuapp.com/";
 console.log("TOKEN : ")
 console.log(TOKEN)
 const queries = {};
 
-server.use(express.static(path.join(__dirname, 'public-match3')));
+server.use(express.static(path.join(__dirname, 'public')));
 
-bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This bot implements a T-Rex jumping game. Say /game if you want to play."));
-bot.onText(/start|game/, (msg) => { 
-    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called /startgame : Game name : ${gameName}`)
-    console.log(`User : ${msg.from.username} called /startgame : Game name : ${gameName}`)
+bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This bot implements some funny games. Say /trex, /match3, /shooter if you want to play games."));
+bot.onText(/trex/, (msg) => { 
+    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameName}`)
+    console.log(`User : ${msg.from.username} called /trex : Game name : ${gameName}`)
+    bot.sendGame(msg.from.id, gameName) 
+});
+
+bot.onText(/match3/, (msg) => { 
+    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameName}`)
+    console.log(`User : ${msg.from.username} called /match3 : Game name : ${gameName}`)
+    bot.sendGame(msg.from.id, gameName) 
+});
+
+bot.onText(/shooter/, (msg) => { 
+    bot.sendMessage(msg.from.id, `User : ${msg.from.username} called : Game name : ${gameName}`)
+    console.log(`User : ${msg.from.username} called /shooter : Game name : ${gameName}`)
     bot.sendGame(msg.from.id, gameName) 
 });
 
@@ -27,7 +42,7 @@ bot.on("callback_query", function (query) {
         bot.answerCallbackQuery(query.id, "Sorry, '" + query.game_short_name + "' is not available.");
     } else {
         queries[query.id] = query;
-        let gameurl = domainGameHeroku + "index.html?id=" + query.id;
+        let gameurl = domainGameHeroku + gameName + "/index.html?id=" + query.id;
         bot.answerCallbackQuery({
             callback_query_id: query.id,
             url: gameurl
