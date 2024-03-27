@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>WebSocket Example</title>
     <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
 </head>
 
 <body>
@@ -57,7 +58,7 @@
     <script>
         /* C1 : Localhost  */
         // const socket = new WebSocket('ws://localhost:3000');
-        
+
         /* C2 : Heroku  */
         // const socket = new WebSocket('wss://trex-brian-tele-01-8d0441e438f8.herokuapp.com');
 
@@ -102,6 +103,8 @@
         }
 
         function placeBet(choice) {
+
+            bet(choice)
             const message = {
                 action: 'place_bet',
                 choice: choice

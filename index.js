@@ -75,6 +75,28 @@ bot.on("inline_query", function (iq) {
     bot.answerInlineQuery(iq.id, [{ type: "game", id: "0", game_short_name: gameName }]);
 });
 
+/* API ROUTE */
+
+server.get("/bet/:value", function (req, res, next) {
+    if (!Object.hasOwnProperty.call(queries, req.query.id)) return next();
+    let query = queries[req.query.id];
+    console.log("=== API Bet called : ")
+    console.log(query)
+    let options;
+    if (query.message) {
+        options = {
+            chat_id: query.message.chat.id,
+            message_id: query.message.message_id
+        };
+    } else {
+        options = {
+            inline_message_id: query.inline_message_id
+        };
+    }
+    bot.setGameScore(query.from.id, parseInt(req.params.score), options,
+        function (err, result) { });
+});
+
 server.get("/highscore/:score", function (req, res, next) {
     if (!Object.hasOwnProperty.call(queries, req.query.id)) return next();
     let query = queries[req.query.id];
@@ -92,6 +114,7 @@ server.get("/highscore/:score", function (req, res, next) {
     bot.setGameScore(query.from.id, parseInt(req.params.score), options,
         function (err, result) { });
 });
+
 
 
 
