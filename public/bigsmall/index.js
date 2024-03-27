@@ -3,7 +3,7 @@ var playerid = url.searchParams.get("id");
 
 function bet(value){
     console.log("URL : " + url)
-    console.log("playerId : " + playerId)
+    console.log("playerId : " + playerid)
     // Submit highscore to Telegram
     var xmlhttp = new XMLHttpRequest();
     var url = "https://trex-brian-tele-01-8d0441e438f8.herokuapp.com/bet/" + distance + 
