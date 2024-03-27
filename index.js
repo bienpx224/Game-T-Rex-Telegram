@@ -175,7 +175,7 @@ function roundCounter(roundNumber) {
                 round.counter++;
                 // round.small_money += Math.floor(Math.random() * 3000)
                 // round.big_money += Math.floor(Math.random() * 3000)
-                console.log(`Current round : ${currentRoundNumber} , count : ${round.counter}`)
+                // console.log(`Current round : ${currentRoundNumber} , count : ${round.counter}`)
                 
                 
                 round.save((error, eSave) => {
@@ -194,7 +194,7 @@ function roundCounter(roundNumber) {
                     round.dice = Math.floor(Math.random() * 3) + 4;
                 }
                 round.save((error,eSave) => {
-                    console.log("Winner is : " + round.result)
+                    console.log("Round : " + roundNumber + " - Result is : " + round.result)
                     response.message = `RoundCounter${roundNumber}`
                     response.data = eSave
                     wss.broadcast(JSON.stringify(response)) 
